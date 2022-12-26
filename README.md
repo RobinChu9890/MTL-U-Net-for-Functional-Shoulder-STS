@@ -18,5 +18,5 @@ The figure above presents the architecture of the proposed deep MTL U-Net. The s
 ## Results
 ![image](https://user-images.githubusercontent.com/102669387/209527998-49b88213-7ea7-4d14-9b19-e3a5495b12c4.png)
 
-#### Disclaimer
+### Disclaimer
 This is still a work in progress and is far from being perfect: if you find any bug please don't hesitate to open an issue.
