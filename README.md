@@ -15,8 +15,8 @@ performance compared to using single-task models. It shows the effectiveness of 
 ![image](https://user-images.githubusercontent.com/102669387/209524513-60931bc6-7683-4b14-80e5-259615606ff8.png)
 The figure above presents the architecture of the proposed deep MTL U-Net. The structure can be separated into three parts: the STS encoder 𝐺𝑒, the STS decoder 𝐺𝑑, and the transition point detector 𝐺𝑡. 𝐺𝑒 and 𝐺𝑑 perform sub-task classification on each time point for the STS task while 𝐺𝑒 and 𝐺𝑡 perform the TPD task. Both tasks share the parameters of 𝐺𝑒.
 
-##Results
+## Results
 ![image](https://user-images.githubusercontent.com/102669387/209527998-49b88213-7ea7-4d14-9b19-e3a5495b12c4.png)
 
-####Disclaimer
+#### Disclaimer
 This is still a work in progress and is far from being perfect: if you find any bug please don't hesitate to open an issue.
