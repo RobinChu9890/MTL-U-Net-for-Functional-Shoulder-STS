@@ -11,17 +11,23 @@ In this repostiry, we would breifly introduce the structure of the proposed deep
 
 The figure above presents the architecture of the proposed deep MTL U-Net. The structure can be separated into three parts: the STS encoder 𝐺𝑒, the STS decoder 𝐺𝑑, and the transition point detector 𝐺𝑡. 𝐺𝑒 and 𝐺𝑑 perform sub-task classification on each time point for the STS task while 𝐺𝑒 and 𝐺𝑡 perform the TPD task. Both tasks share the parameters of 𝐺𝑒.
 
-## Experimental dataset and trianed deep MTL U-Net
+## The experimental validation set
 This repostiry provides the validation set containing 163 time sequences of functional shoulder tasks collected with IMUs. 
   * 20 subjects: 10 healthy subjects and 10 patients with FS
   * 5 functional shoulder tasks: washing head (WH), washing upper back (WUB), washing lower back (WLB), putting an object on a high shelf (POH), and removing an object from the back pocket (ROB)
-  > Each task is performed once in one recording session and is divided into three shoulder sub-tasks. The shoulder sub-task description of five selected shoulder tasks are shown in the table below. Sub-task 1, 2, and 3 of different tasks are trained as the same class to validate the generality of the proposed method.  
+    * Each task is performed once in one recording session and is divided into three shoulder sub-tasks.
+    * The shoulder sub-task description of five selected shoulder tasks are shown in the table below.
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/102669387/209618125-c054a3cb-7312-456b-a6da-97efd882ca6f.png"  width=35% height=35%>
+      
+    * Sub-task 1, 2, and 3 of different tasks are trained as the same class to validate the generality of the proposed method.  
   * 2 IMUs (APDM Inc., Portland, USA)
     * sampling rate of 128 Hz
-    * fastened to the wrist and upper arm of the dominant side for healthy subjects and the affected side for patients.
-  > Each IMU contains a tri-axial accelerometer (range: ±16 g, resolution: 14 bits) and a tri-axial gyroscope (range: ±2000 °/s, resolution: 16 bits) to collect time-serial data with 4 modalities and 3 axes.  
-  <p align="center">
-  <img src="https://user-images.githubusercontent.com/102669387/209618125-c054a3cb-7312-456b-a6da-97efd882ca6f.png"  width=50% height=50%>
+    * Fastened to the wrist and upper arm of the dominant side for healthy subjects and the affected side for patients.
+    * Each IMU contains a tri-axial accelerometer (range: ±16 g, resolution: 14 bits) and a tri-axial gyroscope (range: ±2000 °/s, resolution: 16 bits) to collect time-serial data with 4 modalities and 3 axes.  
+
+> All tasks sequences we collected are applied with zero-padding for length resizing. This resizing process ensures all sequences of the dataset to the same size, 𝑙𝑚𝑎𝑥. The added zero samples are labeled as a new sub-task class to be distinguished from the original shoulder sub-task samples.  
+> The sub-task boundaries in each IMU sequence are normalized with a respect to 𝑙𝑚𝑎𝑥.
 
 ## Experimental results
 <p align="center">
