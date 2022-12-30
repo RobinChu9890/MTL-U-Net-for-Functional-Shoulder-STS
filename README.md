@@ -1,6 +1,6 @@
 # Multi-Task Learning U-Net for Functional Shoulder Sub-Task Segmentation
 
-A trained deep MTL U-Net could be downloaded here:
+A trained deep MTL U-Net could be downloaded here:  
 https://drive.google.com/file/d/10R9mnqxuRENmgr3JhNi1pg9OOqXd_-IR/view?usp=share_link
 
 ## Abstract
