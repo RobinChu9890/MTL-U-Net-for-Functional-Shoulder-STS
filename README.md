@@ -56,7 +56,7 @@ To demonstrate the effectiveness of the proposed deep MTL U-Net for STS, we comp
 <p align="center">Table 2. The performance comparison between deep MTL U-Net and simplified models<br/></p>
 <table align="center">
   <tr><th>Task</th><th>Structure</th><th>Recall (%)</th><th>Precision (%)</th><th>F1-score (%)</th></tr>
-  <tr><td rowspan="2" align='center'>STS</td><td align='center'>Deep MTL U-Net</td><td align='center'>**90.31**</td><td align='center'>**89.64**</td><td align='center'>**89.92**</td></tr>
+  <tr><td rowspan="2" align='center'>STS</td><td align='center'>Deep MTL U-Net</td><td align='center'><b>90.31</b></td><td align='center'>**89.64**</td><td align='center'>**89.92**</td></tr>
     <tr><td align='center'>U-Net only (without $G_T$)</td><td align='center'>89.52</td><td align='center'>89.08</td><td align='center'>89.26</td></tr>
   <tr><td rowspan="2" align='center'>TPD</td><td align='center'>Deep MTL U-Net</td><td align='center'>88.26</td><td align='center'>87.61</td><td align='center'>87.56</td></tr>
     <tr><td align='center'>CNN only (without $G_D$)</td><td align='center'>87.62</td><td align='center'>87.55</td><td align='center'>87.56</td></tr>
