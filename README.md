@@ -53,7 +53,14 @@ To demonstrate the effectiveness of the proposed deep MTL U-Net for STS, we comp
 
 [^2]: C.-Y. Chang et al., "Automatic functional shoulder task identification and sub-task segmentation using wearable inertial measurement units for frozen shoulder assessment," Sensors, vol. 21, no. 1, p. 106, 2020.
 
-<p align="center">Table 2. The performance comparison between deep MTL U-Net and simplified models<br/><img src="https://user-images.githubusercontent.com/102669387/217759281-d6109434-f94e-4402-8846-2b3103b4f28e.png" width=35% height=35%></p>
+<p align="center">Table 2. The performance comparison between deep MTL U-Net and simplified models<br/></p>
+<table align="center">
+  <tr><th>Task</th><th>Structure</th><th>Recall (%)</th><th>Precision (%)</th><th>F1-score (%)</th></tr>
+  <tr><td rowspan="2" align='center'>STS</td><td align='center'>Deep MTL U-Net</td><td align='center'>**90.31**</td><td align='center'>**89.64**</td><td align='center'>**89.92**</td></tr>
+    <tr><td align='center'>U-Net only (without $G_T$)</td><td align='center'>89.52</td><td align='center'>89.08</td><td align='center'>89.26</td></tr>
+  <tr><td rowspan="2" align='center'>TPD</td><td align='center'>Deep MTL U-Net</td><td align='center'>88.26</td><td align='center'>87.61</td><td align='center'>87.56</td></tr>
+    <tr><td align='center'>CNN only (without $G_D$)</td><td align='center'>87.62</td><td align='center'>87.55</td><td align='center'>87.56</td></tr>
+</table>
 
 ## A simple guideline to practice
 Besides source codes, this repostiry provides a [trained deep MTL U-Net](https://drive.google.com/file/d/10R9mnqxuRENmgr3JhNi1pg9OOqXd_-IR/view?usp=share_link), a [validation set](/val_set.npy), and a [validation script](/validation.py) for demonstration.
