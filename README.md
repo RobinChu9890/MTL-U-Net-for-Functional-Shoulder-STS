@@ -1,40 +1,29 @@
 # Multi-Task Learning U-Net for Functional Shoulder Sub-Task Segmentation
 
-A trained deep MTL U-Net could be downloaded here:  
-https://drive.google.com/file/d/10R9mnqxuRENmgr3JhNi1pg9OOqXd_-IR/view?usp=share_link
-
 ## Abstract
-In functional shoulder assessment, functional shoulder sub-tasks could provide more function information for clinical frozen shoulder (FS) assessment. However, label annotation for shoulder sub-tasks still relies on manual observation and operation in medical practice, which is time-consuming and prone to errors. To support clinical evaluation, this work proposes a deep multi-task learning (MTL) U-Net for automatic functional shoulder sub-task segmentation (STS). The transition point detection (TPD) based on convolutional neural networks (CNN) serves as the auxiliary task during the training stage. The fine-grained transition-related information from TPD task helps STS task have better ability to tackle the boundary between functional shoulder sub-tasks, and TPD task obtains critical contextual knowledge from STS task to precisely detect transition points between shoulder sub-tasks. MTL transfers the knowledge across tasks and boost the performance of STS.  
-  
-In this repostiry, we would breifly introduce the structure of the proposed deep MTL U-Net and the collected dataset. To present the effectiveness of our network, we conduct the experiments using wearable inertial measurement units (IMUs) to record 805 shoulder task sequences, which is collected from 20 healthy subjects and 43 patients with FS. The dataset is splited into around 80% (655 sequences) and 20% (150 sequences) for training and validation, respectively. The trained network and the validation set would be provided in this repostiry.  
+The assessment of a frozen shoulder (FS) is critical for evaluating outcomes and medical treatment. Analysis of functional shoulder sub-tasks provides more crucial information, but current manual labeling methods are time-consuming and prone to errors. To address this challenge, we propose a deep multi-task learning (MTL) U-Net to provide an automatic and reliable functional shoulder sub-task segmentation (STS) tool for clinical evaluation in FS. The proposed approach contains the main task of STS and the auxiliary task of transition point detection (TPD). For the main STS task, a U-Net architecture including an encoder-decoder with skip connection is presented to perform shoulder sub-task classification for each time point. The auxiliary TPD task uses lightweight convolutional neural networks architecture to detect the boundary between shoulder sub-tasks. A shared structure is implemented between two tasks and their objective functions of them are optimized jointly. The fine-grained transition-related information from the auxiliary TPD task is expected to help the main STS task better detect boundaries between functional shoulder sub-tasks. We conduct the experiments using wearable inertial measurement units to record 815 shoulder task sequences collected from 20 healthy subjects and 43 patients with FS. The experimental results present that the deep MTL U-Net can achieve superior performance compared to using single-task models. It shows the effectiveness of the proposed method for functional shoulder STS.
 
-## An overview of the proposed deep MTL U-Net
-<p align="center">
-<img src="https://user-images.githubusercontent.com/102669387/209524513-60931bc6-7683-4b14-80e5-259615606ff8.png" width=80% height=80%>
+## Data preprocessing
+Before fed into the network, all time-serial data is first denoised with simple moving average (SMA) filter by averaging a group of samples. A 5-point SMA filter is calculated as the equation below, where $\tilde{x}$ is the filtered sample, $x$ is the original sample, and $n$ is the sample index. The example smoothed time-serial data is presented in Fig. 1 (a).
+
+$$\tilde{x}_n = \frac{x_{n-2}+x_{n-1}+x_n+x_{n+1}+x_{n+2}}{5}$$
+
+Next, we apply zero-padding to each filtered time-serial sequence $\tilde{X}$ for length resizing. This resizing process ensures all sequences to the same size. Let $l_i$ be the length of sequence $i$, and $l_{max}$ is the maximum of $\\{l_i│\forall i \in [1,n]\\}$, where $n$ is the total number of sequences. Zero values are added before and after each original time-serial sequence to ensure the new sequence $\hat{X}$ have the same length equal to $l_{max}$ , as shown in Fig. 1 (b).
+
+The added zero samples are labeled as a new sub-task class to be distinguished from the original shoulder sub-task samples. The sub-task boundaries in each IMU sequence are normalized with a respect to $l_{max}$ . The resized sequence of class labels $C$ and the set of transition points $P$ for $\hat{X}$ are illustrated in Fig. 1 (c).
+
+<p align="center"><img src="https://user-images.githubusercontent.com/102669387/217750074-4cbdceb9-d3e7-48a0-ae34-a58807a9cc1a.png" width=40% height=40%><br/>(a)<br/><img src="https://user-images.githubusercontent.com/102669387/217750086-a319831c-6619-4105-8f8f-2121b19d6895.png" width=40% height=40%><br/>(b)<br/><img src="https://user-images.githubusercontent.com/102669387/217750101-fd94ed7a-d281-45b1-94da-ab00b351c6e2.png" width=40% height=40%><br/>(c)<br/>Figure 1. Illustration of time-serial data with data preprocessing. (a) The filtered time-serial data $\tilde{X}$. (b) The time-serial data with zero padding $\hat{X}$. (c) The corresponding class label sequence $C$ and the set of transition point label $T$ for $\hat{X}$.</p>
+
+## Deep MTL U-Net
+<p align="center"><img src="https://user-images.githubusercontent.com/102669387/209524513-60931bc6-7683-4b14-80e5-259615606ff8.png" width=80% height=80%></p>
 
 The figure above presents the architecture of the proposed deep MTL U-Net. The structure can be separated into three parts: the STS encoder 𝐺𝑒, the STS decoder 𝐺𝑑, and the transition point detector 𝐺𝑡. 𝐺𝑒 and 𝐺𝑑 perform sub-task classification on each time point for the STS task while 𝐺𝑒 and 𝐺𝑡 perform the TPD task. Both tasks share the parameters of 𝐺𝑒.
 
-## The experimental validation set
-This repostiry provides the validation set containing 163 time sequences of functional shoulder tasks collected with IMUs. 
-  * 20 subjects: 10 healthy subjects and 10 patients with FS
-  * 5 functional shoulder tasks: washing head (WH), washing upper back (WUB), washing lower back (WLB), putting an object on a high shelf (POH), and removing an object from the back pocket (ROB)
-    * Each task is performed once in one recording session and is divided into three shoulder sub-tasks.
-    * The shoulder sub-task description of five selected shoulder tasks are shown in the table below.
-    <p align="center">
-    <img src="https://user-images.githubusercontent.com/102669387/209618125-c054a3cb-7312-456b-a6da-97efd882ca6f.png"  width=35% height=35%>
-      
-    * Sub-task 1, 2, and 3 of different tasks are trained as the same class to validate the generality of the proposed method.  
-  * 2 IMUs (APDM Inc., Portland, USA)
-    * sampling rate of 128 Hz
-    * Fastened to the wrist and upper arm of the dominant side for healthy subjects and the affected side for patients.
-    * Each IMU contains a tri-axial accelerometer (range: ±16 g, resolution: 14 bits) and a tri-axial gyroscope (range: ±2000 °/s, resolution: 16 bits) to collect time-serial data with 4 modalities and 3 axes.  
+## Experimental results  
 
-> All tasks sequences we collected are applied with zero-padding for length resizing. This resizing process ensures all sequences of the dataset to the same size, 𝑙𝑚𝑎𝑥. The added zero samples are labeled as a new sub-task class to be distinguished from the original shoulder sub-task samples.  
-> The sub-task boundaries in each IMU sequence are normalized with a respect to 𝑙𝑚𝑎𝑥.
+## A simple guideline for practice
+Besides source codes, this repostiry provides a [trained deep MTL U-Net](https://drive.google.com/file/d/10R9mnqxuRENmgr3JhNi1pg9OOqXd_-IR/view?usp=share_link), a [validation set](/val_set.npy), and a [validation script](/validation.py) for demonstration.
 
-## Experimental results
-<p align="center">
-<img src=""  width=80% height=80%>
 
-### Disclaimer
+## Disclaimer
 This is still a work in progress and is far from being perfect: if you find any bug please don't hesitate to open an issue.
