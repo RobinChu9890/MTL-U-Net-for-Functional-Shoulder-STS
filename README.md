@@ -25,6 +25,7 @@ Fig. 2 presents the architecture of the proposed deep MTL U-Net. The structure c
 Given an IMU sequence with zero padding $\hat{X} = \\{\hat{x}^{m,a}\_i │ \forall i \in [1,l\_{max}], m \in M, a \in A\\}$, where $\hat{x}\_i$ is the sample point at time point $i$, $M$ is the modality set, and $A$ is the axis set. The corresponding class label sequence $C = \\{c_i | \forall c_i \in L, i \in [1,l_{max}]\\}$ and a transition points set $P = \\{p_j | \forall p_j \in [1,l_{max}], j \in [1,n_p]\\}$ are determined as the target for STS and TPD respectively, where $L$ is the sub-task class set, and $n_p$ is the number of sub-task boundary. The predicted class label sequence $\hat{C} = \\{\hat{c}\_i | \forall \hat{c}\_i \in L, i \in [1,l_{max}]\\}$ from $G_d$ and the predicted set of transition points $\hat{P} = \\{\hat{p}\_j | \forall \hat{p}\_j \in [1,l_{max}], j \in [1,n_p]\\}$ from $G_t$ are given formally by the following equations:
 
 $$\hat{C} = G_d(G_e (\hat{X}; θ_e ); θ_d),$$
+
 $$\hat{P} = G_t(G_e (\hat{X}; θ_e ); θ_t),$$
 
 where $θ_e$, $θ_d$, and $θ_t$ are the parameters of $G_e$, $G_d$, and $G_t$, respectively.
