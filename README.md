@@ -1,6 +1,7 @@
 # Multi-Task Learning U-Net for Functional Shoulder Sub-Task Segmentation
-
 The assessment of a frozen shoulder (FS) is critical for evaluating outcomes and medical treatment. Analysis of functional shoulder sub-tasks provides more crucial information, but current manual labeling methods are time-consuming and prone to errors. To address this challenge, we propose a deep multi-task learning (MTL) U-Net to provide an automatic and reliable functional shoulder sub-task segmentation (STS) tool for clinical evaluation in FS. The proposed approach contains the main task of STS and the auxiliary task of transition point detection (TPD). For the main STS task, a U-Net architecture including an encoder-decoder with skip connection is presented to perform shoulder sub-task classification for each time point. The auxiliary TPD task uses lightweight convolutional neural networks architecture to detect the boundary between shoulder sub-tasks. A shared structure is implemented between two tasks and their objective functions of them are optimized jointly. The fine-grained transition-related information from the auxiliary TPD task is expected to help the main STS task better detect boundaries between functional shoulder sub-tasks. We conduct the experiments using wearable inertial measurement units to record 815 shoulder task sequences collected from 20 healthy subjects and 43 patients with FS. The experimental results present that the deep MTL U-Net can achieve superior performance compared to using single-task models. It shows the effectiveness of the proposed method for functional shoulder STS.
+
+
 
 ## Data preprocessing
 Before fed into the network, all time-serial data is first denoised with simple moving average (SMA) filter by averaging a group of samples. A 5-point SMA filter is calculated as the equation below:
@@ -57,7 +58,12 @@ Each task is performed once in one recording session and is divided into three s
     <tr><td align='center'>3</td><td>Removing the smartphone from the back pocket to the initial position with the dominant/affected hand</td></tr>
 </table>
 
-## Experimental results  
+## Implementation details
+The element number of sub-task class set $L$ is four, including three functional shoulder sub-task and one zero-padding class. The number of sub-task boundary $n_p$ is four. The optimizer is AdamW with an initial learning rate of 0.001. A total 128 epochs are used for mini-batch training, where the batch size is 64.<br/>
+This work utilizes 10-fold cross validation on the collected dataset for performance evaluation. Three common metrics are chosen as the criteria for performance evaluation, including recall, precision, and F1-score.<br/>
+The experiments are processed and examined on python 3.9 in a Windows 11 environment with a GPU of NVIDIA RTX 3080. The deep learning network is programed using PyTorch 1.12.1 with CUDA 11.6.
+
+## Experimental results
 To demonstrate the effectiveness of the proposed deep MTL U-Net for STS, we compare the proposed method with baseline models without MTL, including a single-task U-Net for STS and a single-task CNN for TPD. These simplified networks have the same experimental details, and their parameters are optimized. The experiment results are presented in Table 2. It shows that the proposed deep MTL U-Net can reach superior performance to the single-task models. The F1-score on STS and TPD are increased by 0.66% and 0.32%, respectively. Moreover, the segmentation f1-score (89.92%) of the proposed model notably outperforms that (83.23%) of the prior study[^2] approach using conventional sliding window and machine learning techniques.
 
 [^2]: C.-Y. Chang et al., "Automatic functional shoulder task identification and sub-task segmentation using wearable inertial measurement units for frozen shoulder assessment," Sensors, vol. 21, no. 1, p. 106, 2020.
