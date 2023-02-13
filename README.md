@@ -92,6 +92,8 @@ matplotlib >= 3.5.2
 seaborn >= 0.11.2
 ```
 
+
+
 * The network is trained with 655 time sequences (around 80%) of the collected functional shoulder tasks.
 * The validation set contains the remainging data, which comprises 150 time sequences collected from 2 healthy subjects and 4 patients with FS.
 * The validation script is a well coded program that would automatically retrieve the network and data and present the validation results as figures.
