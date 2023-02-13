@@ -79,6 +79,9 @@ To demonstrate the effectiveness of the proposed deep MTL U-Net for STS, we comp
 
 ## A simple guideline to practice
 Besides source codes, this repostiry provides a [trained deep MTL U-Net](https://drive.google.com/file/d/10R9mnqxuRENmgr3JhNi1pg9OOqXd_-IR/view?usp=share_link), a [validation set](/val_set.npy), and a [validation script](/validation.py) for demonstration.
+
+Before you start the practice, please note that the provided resources are organized and processed with python 3.9 in a Windows 11 enviroment. The utilized function bases should be 
+
 * The network is trained with 655 time sequences (around 80%) of the collected functional shoulder tasks.
 * The validation set contains the remainging data, which comprises 150 time sequences collected from 2 healthy subjects and 4 patients with FS.
 * The validation script is a well coded program that would automatically retrieve the network and data and present the validation results as figures.
