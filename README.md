@@ -13,7 +13,8 @@ where $\tilde{x}$ is the filtered sample, $x$ is the original sample, and $n$ is
 Next, we apply zero-padding to each filtered time-serial sequence $\tilde{X}$ for length resizing. This resizing process ensures all sequences to the same size. Let $l_i$ be the length of sequence $i$, and $l_{max}$ is the maximum of $\\{l_i│\forall i \in [1,n]\\}$, where $n$ is the total number of sequences. Zero values are added before and after each original time-serial sequence to ensure the new sequence $\hat{X}$ have the same length equal to $l_{max}$, as shown in Fig. 1 (b).<br/>
 The added zero samples are labeled as a new sub-task class to be distinguished from the original shoulder sub-task samples. The sub-task boundaries in each IMU sequence are normalized with a respect to $l_{max}$. The resized sequence of class labels $C$ and the set of transition points $P$ for $\hat{X}$ are illustrated in Fig. 1 (c).
 
-<p align="center"><img src="https://user-images.githubusercontent.com/102669387/217750074-4cbdceb9-d3e7-48a0-ae34-a58807a9cc1a.png" width=40% height=40%><br/>(a)<br/><img src="https://user-images.githubusercontent.com/102669387/217750086-a319831c-6619-4105-8f8f-2121b19d6895.png" width=40% height=40%><br/>(b)<br/><img src="https://user-images.githubusercontent.com/102669387/217750101-fd94ed7a-d281-45b1-94da-ab00b351c6e2.png" width=40% height=40%><br/>(c)<br/>Figure 1. Illustration of time-serial data with data preprocessing. (a) The filtered time-serial data $\tilde{X}$. (b) The time-serial data with zero padding $\hat{X}$. (c) The corresponding class label sequence $C$ and the set of transition point label $T$ for $\hat{X}$.</p>
+<p align="center"><img src="https://user-images.githubusercontent.com/102669387/218629199-af185d12-788c-40ce-aed6-7a7b1bc47164.png" width=50% height=50%><br/>(a)<br/><img src="https://user-images.githubusercontent.com/102669387/218629236-aa2fb2e9-026d-4ea7-84aa-afdd0fbb3635.png" width=50% height=50%><br/>(b)<br/><img src="https://user-images.githubusercontent.com/102669387/217750101-fd94ed7a-d281-45b1-94da-ab00b351c6e2.png" width=50% height=50%><br/>(c)<br/>Figure 1. Illustration of time-serial data with data preprocessing. (a) The filtered time-serial data $\tilde{X}$. (b) The time-serial data with zero padding $\hat{X}$. (c) The corresponding class label sequence $C$ and the set of transition point label $T$ for $\hat{X}$.</p>
+
 
 ## Deep MTL U-Net
 <p align="center"><img src="https://user-images.githubusercontent.com/102669387/209524513-60931bc6-7683-4b14-80e5-259615606ff8.png" width=80% height=80%><br/>Figure 2. The architecture of proposed deep MTL U-Net</p>
@@ -78,12 +79,18 @@ To demonstrate the effectiveness of the proposed deep MTL U-Net for STS, we comp
 </table>
 
 ## A simple guideline to practice
-Besides source codes, this repostiry provides a [trained deep MTL U-Net](https://drive.google.com/file/d/10R9mnqxuRENmgr3JhNi1pg9OOqXd_-IR/view?usp=share_link), a [validation set](/val_set.npy), and a [validation script](/validation.py) for demonstration.
+Besides source codes, this repostiry also provides a [trained deep MTL U-Net](https://drive.google.com/file/d/10R9mnqxuRENmgr3JhNi1pg9OOqXd_-IR/view?usp=share_link), a [validation set](/val_set.npy), and a [validation script](/validation.py) for demonstration.
 
-Before you start the practice, please note that the provided resources are organized and processed with python 3.9 in a Windows 11 enviroment. The utilized packages/libraries should reach the specific version to ensure the script functioning well, as shown below:
+* The network is trained with 665 time sequences (around 80%) of the collected functional shoulder tasks.
+* The validation set contains 150 time sequences (around 20%) of the collected functional shoulder tasks, which comprises data of 2 healthy subjects and 4 patients with FS.
+* The validation script is a well coded program that automatically retrieves the network and validation set and presents results as figures.
 
+### To start the pratice:
+
+0. To ensure the script functioning, please note that these resources are organized and programed with python 3.9 in a Windows 11 enviroment.
+
+1. Confirm that the packages/libraries shown below reach or exceed specific version:
 ```
-python == 3.9
 numpy >= 1.21.5
 pandas >= 1.4.4
 pytorch >= 1.12.0
@@ -92,12 +99,12 @@ matplotlib >= 3.5.2
 seaborn >= 0.11.2
 ```
 
+2. Download the provided resources:
+* [Trained deep MTL U-Net](https://drive.google.com/file/d/10R9mnqxuRENmgr3JhNi1pg9OOqXd_-IR/view?usp=share_link) (A link directing to Google drive due to the limitation of uploading size for single file)
+* [Validation set](/val_set.npy)
+* [Validation script](/validation.py)
 
-
-* The network is trained with 655 time sequences (around 80%) of the collected functional shoulder tasks.
-* The validation set contains the remainging data, which comprises 150 time sequences collected from 2 healthy subjects and 4 patients with FS.
-* The validation script is a well coded program that would automatically retrieve the network and data and present the validation results as figures.
-To make the script functioning well, please ensure that 
+3. Open the script with programming software. Set the directory of the downloaded **Trained deep MTL U-Net** and **Validation set**. Run the script.
 
 ## Disclaimer
 This is still a work in progress and is far from being perfect: if you find any bug please don't hesitate to open an issue.
