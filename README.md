@@ -87,7 +87,7 @@ Besides source codes, this repostiry also provides a [trained deep MTL U-Net](ht
 
 ### To start the pratice:
 
-0. To ensure the script functioning, please note that these resources are organized and programed with python 3.9 in a Windows 11 enviroment.
+0. Please note that these resources are organized and programed with python 3.9 in a Windows 11 enviroment to ensure the script functioning.
 
 1. Confirm that the packages/libraries shown below reach or exceed specific version:
 ```
@@ -104,7 +104,7 @@ seaborn >= 0.11.2
 * [Validation set](/val_set.npy)
 * [Validation script](/validation.py)
 
-3. Open the script with programming software. Set the directory of the downloaded **Trained deep MTL U-Net** and **Validation set**. Run the script.
+3. Open the script with programming software. Set the directory of the downloaded **Trained deep MTL U-Net** and **Validation set**. Run the script. 
 
 ## Disclaimer
 This is still a work in progress and is far from being perfect: if you find any bug please don't hesitate to open an issue.
