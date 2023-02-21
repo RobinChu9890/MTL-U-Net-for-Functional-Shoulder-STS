@@ -27,10 +27,10 @@ def seed_everything(seed=0):
 
 seed_everything()
 
-label_table_path = r'C:\UClab\RobinChu\frozen shoulder\labelled data\Label Table at 128 Hz.csv'
+label_table_path = r''
 label_table = pd.read_csv(label_table_path, header=None)
 
-file_rootpath = r'C:\UClab\RobinChu\frozen shoulder\labelled data\FS '+config_sys['de-noising']+' Data'
+file_rootpath = r''
    
 datas_info = []
 for data_index in range(len(label_table.T)):
@@ -442,8 +442,6 @@ for fold_index, (train_indexes, test_indexes) in enumerate(kf.split(tasks)):
     criterion1 = nn.CrossEntropyLoss().to(config_sys['device'])
     criterion2 = nn.MSELoss()
     optimizer = torch.optim.AdamW(model.parameters())
-    # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.95)
-    # scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='max', patience=4)
     scheduler = WarmUp(optimizer, 8, config_sys['epochs'])
     
     train_tasks_gt_concat = list(np.hstack(train_tasks_gt))
