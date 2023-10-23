@@ -9,7 +9,7 @@ The assessment of a frozen shoulder (FS) is critical for evaluating outcomes and
 ## Data preprocessing
 Before fed into the network, all time-serial data is first denoised with simple moving average (SMA) filter by averaging a group of samples. A 5-point SMA filter is calculated as the equation below:
 
-$$\tilde{x}_n = \frac{x_{n-2}+x_{n-1}+x_n+x_{n+1}+x_{n+2}}{5},$$
+$\tilde{x}_n = \frac{x_{n-2}+x_{n-1}+x_n+x_{n+1}+x_{n+2}}{5},$
 
 where $\tilde{x}$ is the filtered sample, $x$ is the original sample, and $n$ is the sample index. The example smoothed time-serial data is presented in Fig. 1 (a).
 
@@ -103,7 +103,7 @@ seaborn >= 0.11.2
 ```
 
 2. Download the provided resources:
-* [Trained deep MTL U-Net](https://drive.google.com/file/d/10R9mnqxuRENmgr3JhNi1pg9OOqXd_-IR/view?usp=share_link) (A link directing to Google drive due to the limitation of uploading size for single file)
+* [Trained deep MTL U-Net](https://drive.google.com/file/d/10R9mnqxuRENmgr3JhNi1pg9OOqXd_-IR/view?usp=share_link) (A link directing to Google drive due to uploading limitation)
 * [Validation set](/val_set.npy)
 * [Validation script](/validation.py)
 
