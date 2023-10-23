@@ -8,9 +8,9 @@ The assessment of a frozen shoulder (FS) is critical for evaluating outcomes and
 
 ## Data preprocessing
 Before fed into the network, all time-serial data is first denoised with simple moving average (SMA) filter by averaging a group of samples. A 5-point SMA filter is calculated as the equation below:
-
-$\tilde{x}_n = \frac{x_{n-2}+x_{n-1}+x_n+x_{n+1}+x_{n+2}}{5},$
-
+```math
+\tilde{x}_n = \frac{x_{n-2}+x_{n-1}+x_n+x_{n+1}+x_{n+2}}{5}
+```
 where $\tilde{x}$ is the filtered sample, $x$ is the original sample, and $n$ is the sample index. The example smoothed time-serial data is presented in Fig. 1 (a).
 
 Next, we apply zero-padding to each filtered time-serial sequence $\tilde{X}$ for length resizing. This resizing process ensures all sequences to the same size. Let $l_i$ be the length of sequence $i$, and $l_{max}$ is the maximum of $\\{l_i│\forall i \in [1,n]\\}$, where $n$ is the total number of sequences. Zero values are added before and after each original time-serial sequence to ensure the new sequence $\hat{X}$ have the same length equal to $l_{max}$, as shown in Fig. 1 (b).<br/>
